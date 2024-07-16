@@ -13,23 +13,23 @@ class ExampleController extends Controller
 }
 {
     function datatask(){
-  return view('datatask');
+  return view('content');
    }
 }
 
-//{
-   // function datatask(Request $request){
+{
+    function datatask(Request $request){
 
-   // $name = $request['name'];
- //   $email = $request['email'];
-   // $subject = $request['subject'];
-   // $message = $request['message'];
+   $name = $request['name'];
+  $email = $request['email'];
+  $subject = $request['subject'];
+ $message = $request['message'];
 
    
 
-   // return 'NAME= '. $name .'Email='.$email.'Subject='.$subject.'Message='.$message
-   // ;
+   return 'NAME= '. $name .'Email='.$email.'Subject='.$subject.'Message='.$message
+  ;
     
     
-//}
-//}
+}
+}
