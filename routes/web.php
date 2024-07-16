@@ -1,11 +1,22 @@
 <?php
 
-//use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ExampleController;
+use Illuminate\Http\Request;
+//Route::get('login',[ExampleController::class,'login']); //action written inside ExampleController 
+//Route::get('cv',[ExampleController::class,'cv']);//action written inside ExampleController 
+Route::get('content',[ExampleController::class,'content']); //action written inside ExampleController
+Route::post('datatask',[ExampleController::class,'datatask']);
 
-//Route::get('/', function () {
-  //  return view('welcome');
+
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+//Route::get('cv', function () {
+ //return view('cv');
 //});
-
 
 //Route::get('s', function () {
    // return "Hi Sara";
@@ -49,40 +60,68 @@
     
 //});
 //Second Task
-Route::prefix('accounts')-> group(function() {
-   Route::get('',function(){
-       return 'accounts';
-   });
- Route::get('admin',function(){
-     return 'accounts admin';
-   });
-   Route::get('user',function(){
-        return 'accounts user';
-   });
+//Route::prefix('accounts')-> group(function() {
+  // Route::get('',function(){
+     //  return 'accounts';
+  // });
+ //Route::get('admin',function(){
+   //  return 'accounts admin';
+  // });
+  // Route::get('user',function(){
+    //    return 'accounts user';
+   //});
  
-});
+//});
 
 
 
-Route::prefix('cars')-> group(function() {
-    Route::get('',function(){
-        return 'cars';
-    });
-        Route::prefix('usa')-> group(function(){
-        Route::get('ford',function(){
-        return 'cars usa ford';
-    }); Route::get('tesla',function(){
-        return 'cars usa tesla';
-    });
-    });       
-     Route::prefix('ger')-> group(function(){
-      Route::get('mercedes',function(){
-        return 'cars ger mercedes';
-    }); Route::get('audi',function(){
-        return 'cars ger audi';
-    }); Route::get('volkswagen',function(){
-        return 'cars ger volkswagen';
-    });
+//Route::prefix('cars')-> group(function() {
+    //Route::get('',function(){
+   //     return 'cars';
+   // });
+     //   Route::prefix('usa')-> group(function(){
+      //  Route::get('ford',function(){
+      //  return 'cars usa ford';
+   // }); Route::get('tesla',function(){
+    //    return 'cars usa tesla';
+   // });
+    //});       
+     //Route::prefix('ger')-> group(function(){
+    //  Route::get('mercedes',function(){
+      //  return 'cars ger mercedes';
+   // }); Route::get('audi',function(){
+    //    return 'cars ger audi';
+    //}); Route::get('volkswagen',function(){
+       // return 'cars ger volkswagen';
+   // });
 
-  });
-});
+  //});
+//});
+//Route::fallback(function(){
+ // return redirect('/');
+//});
+
+ //Route::get('link',function(){
+  //$url=route('sara');
+   //return "<a href='$url'>go to welcome</a>";
+//});
+//Route::get('welcome', function () {
+  //return "welcome to laravel";
+//})->name('sara');
+ 
+
+//Route::get('link',function(){
+//$url =route('s');
+//return "<a href ='$url'>HI</a>";
+//});
+  
+//Route::get('welcome',function(){
+//return "HI HI";
+//})->name('s');
+
+//Route::post('logincheck', function (){
+ // return view('logincheck');
+ // })->name('logincheck');
+    
+
+   
