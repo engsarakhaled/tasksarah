@@ -2,34 +2,27 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
 
 class ExampleController extends Controller
 {
-     function content(){
-   return view('content');
+    public function content()
+    {
+        return view('content'); // Return content view
+    }
+
+    public function datatask(Request $request) 
+    {
+        $data = [
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'subject' => $request->input('subject'),
+            'message' => $request->input('message'),
+        ];
+
+       
+
+        return view('datatask', compact('data')); 
     }
 }
-{
-    function datatask(){
-  return view('content');
-   }
-}
-
-{
-    function datatask(Request $request){
-
-   $name = $request['name'];
-  $email = $request['email'];
-  $subject = $request['subject'];
- $message = $request['message'];
-
    
-
-   return 'NAME= '. $name .'Email='.$email.'Subject='.$subject.'Message='.$message
-  ;
-    
-    
-}
-}

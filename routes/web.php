@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 //Route::get('login',[ExampleController::class,'login']); //action written inside ExampleController 
 //Route::get('cv',[ExampleController::class,'cv']);//action written inside ExampleController 
 Route::get('content',[ExampleController::class,'content']); //action written inside ExampleController
-Route::post('datatask',[ExampleController::class,'datatask']);
+Route::post('datatask',[ExampleController::class,'datatask'])->name('datatask');
 
-
+//2days and i cant answer the task till 3;54 am
 
 Route::get('/', function () {
     return view('welcome');
