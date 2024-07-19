@@ -3,16 +3,26 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExampleController;
 use Illuminate\Http\Request;
-//Route::get('login',[ExampleController::class,'login']); //action written inside ExampleController 
-//Route::get('cv',[ExampleController::class,'cv']);//action written inside ExampleController 
-Route::get('content',[ExampleController::class,'content']); //action written inside ExampleController
-Route::post('datatask',[ExampleController::class,'datatask'])->name('datatask');
-
-//2days and i cant answer the task till 3;54 am
+use App\Http\Controllers\CarController;
+use App\Http\Controllers\ClassroomController;
 
 Route::get('/', function () {
-    return view('welcome');
+   return view('welcome');
 });
+Route::get('classes/create',[ClassroomController::class,'create'])->name('classes.create');
+Route::post('classes',[ClassroomController::class,'store'])->name('classes.store');
+//Route::get('cars/create',[CarController::class,'create'])->name('cars.create');
+//Route::post('cars',[CarController::class,'store'])->name('cars.store');
+//Route::get('login',[ExampleController::class,'login']); //action written inside ExampleController 
+//Route::get('cv',[ExampleController::class,'cv']);//action written inside ExampleController 
+//Route::get('content',[ExampleController::class,'content']); //action written inside ExampleController
+//Route::post('datatask',[ExampleController::class,'datatask'])->name('datatask');
+
+
+
+//Route::get('/', function () {
+   // return view('welcome');
+//});
 
 //Route::get('cv', function () {
  //return view('cv');
@@ -124,4 +134,4 @@ Route::get('/', function () {
  // })->name('logincheck');
     
 
-   
+
