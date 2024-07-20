@@ -27,9 +27,6 @@ Route::post('classes',[ClassroomController::class,'store'])->name('classes.store
 //Route::get('cv', function () {
  //return view('cv');
 //});
-
-//Route::get('s', function () {
-   // return "Hi Sara";
     
 //});
 //Route::get('cars/{id?}', function ($id=0) {
