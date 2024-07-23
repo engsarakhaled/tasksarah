@@ -12,7 +12,12 @@ class ClassroomController extends Controller
      */
     public function index()
     {
-        //
+        $courses=Classroom::get();
+        return view('classes',compact('courses'));
+       
+ 
+ 
+
     }
 
     /**
@@ -28,21 +33,16 @@ class ClassroomController extends Controller
      */
     public function store(Request $request)
     {
-        $className ='Hr';
-        $capacity='50';
-        $is_fulled=true;
-        $price='100';
-        $time_from='1:30:00';
-        $time_to='2:35:00';
-         Classroom::create([
-        'className' =>$className ,
-        'capacity' =>$capacity,
-        'is_fulled'=>$is_fulled,
-        'price'=> $price,
-        'time_from'=>$time_from,
-        'time_to' =>$time_to,
-
-         ]);
+        $data=[
+        'className' =>$request->className,
+        'capacity' =>$request-> capacity,
+        'is_fulled'=>isset($request->is_fulled),
+        'price'=>$request->price,
+        'time_from'=>$request->time_from,
+        'time_to'=>$request-> time_to,
+               ];
+         Classroom::create($data);
+       
          return "Data added succesfully";
 
     }
@@ -52,17 +52,21 @@ class ClassroomController extends Controller
      */
     public function show(string $id)
     {
-        //
+     
     }
 
     /**
      * Show the form for editing the specified resource.
      */
+    
     public function edit(string $id)
-    {
-        //
+    
+    { $course=Classroom::findorfail($id);
+        //dd($classes);
+        return view('edit_class', compact('course')); 
     }
-
+    
+   
     /**
      * Update the specified resource in storage.
      */
