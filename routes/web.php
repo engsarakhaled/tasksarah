@@ -18,7 +18,7 @@ Route::post('classes',[ClassroomController::class,'store'])->name('classes.store
 Route::get('classes',[ClassroomController::class,'index'])->name('classes.index');
 Route::get('classes/{id}',[ClassroomController::class,'edit'])->name('classes.edit');
 //Route::get('login',[ExampleController::class,'login']); //action written inside ExampleController 
-//Route::get('cv',[ExampleController::class,'cv']);//action written inside ExampleController 
+
 //Route::get('content',[ExampleController::class,'content']); //action written inside ExampleController
 //Route::post('datatask',[ExampleController::class,'datatask'])->name('datatask');
 
