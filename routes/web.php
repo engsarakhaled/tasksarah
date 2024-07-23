@@ -31,9 +31,6 @@ Route::get('classes/{id}',[ClassroomController::class,'edit'])->name('classes.ed
 //Route::get('cv', function () {
  //return view('cv');
 //});
-
-//Route::get('s', function () {
-   // return "Hi Sara";
     
 //});
 //Route::get('cars/{id?}', function ($id=0) {
