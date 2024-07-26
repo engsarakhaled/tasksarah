@@ -43,7 +43,7 @@ class ClassroomController extends Controller
                ];
          Classroom::create($data);
        
-         return "Data added succesfully";
+         redirect()->route('classes.index');
 
     }
 
@@ -52,7 +52,10 @@ class ClassroomController extends Controller
      */
     public function show(string $id)
     {
-     
+        { $course=Classroom::findorfail($id);
+            //dd($classes);
+            return view('class_details', compact('course')); 
+        }
     }
 
     /**
@@ -72,14 +75,32 @@ class ClassroomController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+       //dd($request,$id);
+       $data=[
+             'className' =>$request->className,
+             'capacity' =>$request-> capacity,
+             'is_fulled'=>isset($request->is_fulled),
+             'price'=>$request->price,
+             'time_from'=>$request->time_from,
+             'time_to'=>$request-> time_to,
+             ];
+        Classroom::where('id',$id)->update($data);
+        return redirect()->route('classes.index');
     }
-
-    /**
+      /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        Classroom::where('id',$id)->delete();
+        return redirect()->route('classes.index');
+    }
+    public function showDeleted(){
+
+        $courses=Classroom::onlyTrashed()->get();
+        return view('trashedclasses',compact('courses'));
+    
     }
 }
+    
+   

@@ -12,11 +12,19 @@ Route::get('/', function () {
 //Route::get('cars/create',[CarController::class,'create'])->name('cars.create');
 //Route::post('cars',[CarController::class,'store'])->name('cars.store');
 //Route::get('cars',[CarController::class,'index'])->name('cars.index');
-//Route::get('cars/{id}',[CarController::class,'edit'])->name('cars.edit');
+//Route::get('cars/{id}/edit',[CarController::class,'edit'])->name('cars.edit');
+//Route::put('cars/{id}/update',[CarController::class,'update'])->name('cars.update');
+//Route::get('cars/{id}/show',[CarController::class,'show'])->name('cars.show');
+//Route::get('cars/{id}/delete',[CarController::class,'destroy'])->name('cars.destroy');
+//Route::get('cars/trashed',[CarController::class,'showDeleted'])->name('cars.showDeleted');
 Route::get('classes/create',[ClassroomController::class,'create'])->name('classes.create');
 Route::post('classes',[ClassroomController::class,'store'])->name('classes.store');
 Route::get('classes',[ClassroomController::class,'index'])->name('classes.index');
-Route::get('classes/{id}',[ClassroomController::class,'edit'])->name('classes.edit');
+Route::get('classes/{id}/edit',[ClassroomController::class,'edit'])->name('classes.edit');
+Route::put('classes/{id}/update',[ClassroomController::class,'update'])->name('classes.update');
+Route::get('classes/{id}/show',[ClassroomController::class,'show'])->name('classes.show');
+Route::delete('classes/{id}/delete',[ClassroomController::class,'destroy'])->name('classes.destroy');
+Route::get('classes/trashed',[ClassroomController::class,'showDeleted'])->name('classes.showDeleted');
 //Route::get('login',[ExampleController::class,'login']); //action written inside ExampleController 
 //Route::get('cv',[ExampleController::class,'cv']);//action written inside ExampleController 
 //Route::get('content',[ExampleController::class,'content']); //action written inside ExampleController

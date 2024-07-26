@@ -34,6 +34,8 @@
               <th scope="col">Time from</th>
               <th scope="col">Time to</th>
               <th scope="col">Edit</th>
+              <th scope="col">Show</th>
+              <th scope="col">Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -42,15 +44,21 @@
             <tr>
               <td scope="row">{{$course['className']}}</td>
               <td>{{$course['capacity']}}</td>
-              <td>{{$course['']=="1"?"Yes":"NO"}}</td>
+              <td>{{$course['is_fulled']=="1"?"Yes":"NO"}}</td>
               <td>{{$course['price']}}</td>
               <td>{{$course['time_from']}}</td>
               <td>{{$course['time_to']}}</td>
-               <td><a href="{{route('classes.edit',$course['id'])}}">Edit</a></td>
-              
-            </tr>
+              <td><a href="{{route('classes.edit',$course['id'])}}">Edit</a></td>
+              <td><a href="{{route('classes.show',$course['id'])}}">Show</a></td>
+              <td>
+            <form action="{{ route('classes.destroy', $course->id) }}" method="post">
+            @csrf
+            @method('DELETE')
+              <input type="hidden" name="id" value="{{ $course->id }}">
+              <button type="submit" onclick="return confirm('Are you sure you want to delete?')">Delete</button>
+            </form>
+              </td>
             @endforeach
-           
           </tbody>
         </table>
       </div>
