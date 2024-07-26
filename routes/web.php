@@ -26,7 +26,7 @@ Route::get('classes/{id}/show',[ClassroomController::class,'show'])->name('class
 Route::delete('classes/{id}/delete',[ClassroomController::class,'destroy'])->name('classes.destroy');
 Route::get('classes/trashed',[ClassroomController::class,'showDeleted'])->name('classes.showDeleted');
 //Route::get('login',[ExampleController::class,'login']); //action written inside ExampleController 
-//Route::get('cv',[ExampleController::class,'cv']);//action written inside ExampleController 
+
 //Route::get('content',[ExampleController::class,'content']); //action written inside ExampleController
 //Route::post('datatask',[ExampleController::class,'datatask'])->name('datatask');
 
@@ -39,9 +39,6 @@ Route::get('classes/trashed',[ClassroomController::class,'showDeleted'])->name('
 //Route::get('cv', function () {
  //return view('cv');
 //});
-
-//Route::get('s', function () {
-   // return "Hi Sara";
     
 //});
 //Route::get('cars/{id?}', function ($id=0) {
