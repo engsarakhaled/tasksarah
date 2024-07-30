@@ -33,7 +33,7 @@
               <th scope="col">Price</th>
               <th scope="col">Time from</th>
               <th scope="col">Time to</th>
-              <th scope="col">Show</th>
+              <th scope="col">Restore</th>
               <th scope="col">Permanent Delete</th>
             </tr>
           </thead>
@@ -46,14 +46,19 @@
               <td>{{$course['price']}}</td>
               <td>{{$course['time_from']}}</td>
               <td>{{$course['time_to']}}</td>
-              <td><a href="{{route('classes.show',$course['id'])}}">Show</a></td>
               <td>
-            <form action="{{ route('classes.destroy', $course->id) }}" method="post">
-            @csrf
-            @method('DELETE')
-              <input type="hidden" name="id" value="{{ $course->id }}">
-              <button type="submit" onclick="return confirm('Are you sure you want to delete?')">Delete</button>
-            </form>
+                <form action="{{route('classes.restore',$course->id) }}" method="post">
+                  @csrf
+                  @method('patch')
+                <button type="submit" class="btn btn-link m-0 p-0">Restore</button>
+                </form>
+              </td>
+              <td>
+              <form action="{{route('classes.forceDelete',$course->id) }}" method="post">
+                  @csrf
+                  @method('delete')
+                <button type="submit" class="btn btn-link m-0 p-0">Delete</button>
+              </form>
               </td>
             @endforeach
             </tbody>

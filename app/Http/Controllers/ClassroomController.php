@@ -32,21 +32,19 @@ class ClassroomController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $data=[
-        'className' =>$request->className,
-        'capacity' =>$request-> capacity,
-        'is_fulled'=>isset($request->is_fulled),
-        'price'=>$request->price,
-        'time_from'=>$request->time_from,
-        'time_to'=>$request-> time_to,
-               ];
-         Classroom::create($data);
-       
-         redirect()->route('classes.index');
+    {//validate to make rules so if the rules dont follow the required validation ;it will not add into database
+        $data=$request->validate([
+        'className'=>'required|string|max:10',
+        'capacity' =>'required|numeric',
+        'price'=>'required|numeric',
+        'time_from'=>'required',
+        'time_to'=>'required|after:time_from',
+               ]);
+        $data['is_fulled']=isset($request->is_fulled);
+        Classroom::create($data);
+        redirect()->route('classes.index');
 
-    }
-
+    }  
     /**
      * Display the specified resource.
      */
@@ -76,17 +74,18 @@ class ClassroomController extends Controller
     public function update(Request $request, string $id)
     {
        //dd($request,$id);
-       $data=[
-             'className' =>$request->className,
-             'capacity' =>$request-> capacity,
-             'is_fulled'=>isset($request->is_fulled),
-             'price'=>$request->price,
-             'time_from'=>$request->time_from,
-             'time_to'=>$request-> time_to,
-             ];
+       $data=$request->validate([
+        'className'=>'required|string|max:10',
+        'capacity' =>'required|numeric',
+        'price'=>'required|numeric',
+        'time_from'=>'required',
+        'time_to'=>'required|after:time_from',
+               ]);
+        $data['is_fulled']=isset($request->is_fulled);
         Classroom::where('id',$id)->update($data);
         return redirect()->route('classes.index');
     }
+       
       /**
      * Remove the specified resource from storage.
      */
@@ -100,6 +99,18 @@ class ClassroomController extends Controller
         $courses=Classroom::onlyTrashed()->get();
         return view('trashedclasses',compact('courses'));
     
+    }
+    public function restore(string $id)
+    {
+        Classroom::where('id',$id)->restore();
+        return redirect()->route('classes.showDeleted');
+   
+    }
+    public function forceDelete (string $id)
+    {
+        Classroom::where('id',$id)->forceDelete();
+        return redirect()->route('classes.showDeleted');
+
     }
 }
     
