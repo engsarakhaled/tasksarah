@@ -25,8 +25,19 @@ class ExampleController extends Controller
        // return view('datatask', compact('data')); 
    // }
 //}
-public function datatask(Request $request)
-{
+    public function datatask(Request $request)
+  {
     return $request['name'].'<br>'.$request['email'] .'<br>'.$request['subject'].'<br>'.$request['message'];  
+  }
+
+function uploadform(){
+      return view('upload');
+}
+public function upload(Request $request){
+  $file_extension = $request->image->getClientOriginalExtension();
+  $file_name = time() . '.' . $file_extension;
+  $path = 'assests/images';
+  $request->image->move($path, $file_name);
+  return 'Uploaded';
 }
 }

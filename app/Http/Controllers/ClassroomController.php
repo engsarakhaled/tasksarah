@@ -37,8 +37,8 @@ class ClassroomController extends Controller
         'className'=>'required|string|max:10',
         'capacity' =>'required|numeric',
         'price'=>'required|numeric',
-        'time_from'=>'required',
-        'time_to'=>'required|after:time_from',
+        'time_from'=>'required|data_format:H:i',
+        'time_to'=>'required|data_format:H:i|after:time_from',
                ]);
         $data['is_fulled']=isset($request->is_fulled);
         Classroom::create($data);

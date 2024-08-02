@@ -14,6 +14,7 @@ class car extends Model
             'description',
             'price',
             'published',
+            'image',
         
     ];
 }

@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Car;
+use Illuminate\Support\Facades\File;//to use
+use Illuminate\Support\Facades\Log; //to use try and catch
+
 
 class CarController extends Controller
+
 {
     /**
      * Display a listing of the resource.
@@ -31,20 +35,31 @@ class CarController extends Controller
      * Store a newly created resource in storage.
      */
     //validate to make rules so if the rules dont follow the validation ;it will not add into database
-    public function store(Request $request)
-    {
+    
+    public function store(Request $request) {
+   
         $data=$request->validate([
             'carTitle'=>'required|string',
             'description'=>'required|string|max:1000',
             'price'=>'required|numeric',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif',
         ]);
-        //dd($request);
-         $data['published']=isset($request->published);
-         Car::create($data);
-         return redirect()->route('cars.index');
+        $imageName = time().'.'.$request->image->extension();//Generates a Unix timestamp (a number representing the current time).
+        $request->image->move(public_path('assests/images/'), $imageName);//the uploaded image will move into the path (assets/\images) and renamed $imageName
+        $data['image'] = 'assests/images/'.$imageName;
+        $data['published']=isset($request->published);
+        Car::create($data);
+        return redirect()->route('cars.index');
         }
+    
+
        
-       
+    
+    
+
+        
+        
+        
     
 
     /**
@@ -77,13 +92,37 @@ class CarController extends Controller
         'carTitle'=>'required|string',
         'description'=>'required|string|max:1000',
         'price'=>'required|numeric',
+        'image' => 'required|image|mimes:jpeg,png,jpg,gif',
     ]);
-    //dd($request);
+    
+    if ($request->hasFile('image')) {
+        $oldImagePath = 'assests/images/' . $data['image'];
+    
+        try {
+            if (File::exists($oldImagePath)) {
+                File::delete($oldImagePath);
+            }
+        } catch (\Exception $e) {
+            Log::error('Error deleting old image: ' . $e->getMessage());
+            // Handle the error, e.g., return a response or notify the user
+        }
+    
+        
+       }
+        $imageName = time().'.'.$request->image->extension();
+        $request->image->move(public_path('assests/images/'), $imageName);
+        $data['image'] = 'assests/images/'.$imageName;
         $data['published']=isset($request->published);
         Car::where('id',$id)->update($data);
         return redirect()->route('cars.index');
-    }
-
+       }
+       //Checks if a new image was uploaded.
+//If a new image was uploaded, it attempts to delete the old image.
+//Generates a new filename for the uploaded image.
+//Moves the uploaded image to the specified directory.
+//Updates the image and published fields in the $data array.
+//Updates the car record with the new data.
+//Redirects the user to the cars index page.
     /**
      * Remove the specified resource from storage.
      */
@@ -115,4 +154,15 @@ class CarController extends Controller
     return redirect()->route('cars.showDeleted');
 
     }
-    }
+
+   public function upload(Request $request){
+    $file_extension = $request->image->getClientOriginalExtension();
+    $file_name = time() . '.' . $file_extension;
+    $path = 'assests/images';
+    $request->image->move($path, $file_name);
+    return '';
+  }
+  
+  }
+
+ 

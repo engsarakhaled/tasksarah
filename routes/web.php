@@ -32,8 +32,8 @@ Route::patch('classes/{id}',[ClassroomController::class,'restore'])->name('class
 Route::delete('classes/{id}',[ClassroomController::class,'forceDelete'])->name('classes.forceDelete');
 //Route::get('content',[ExampleController::class,'content']); //action written inside ExampleController
 //Route::post('datatask',[ExampleController::class,'datatask'])->name('datatask');
-
-
+Route::get('uploadForm',[ExampleController::class,'uploadForm'])->name('uploadForm');
+Route::post('upload',[ExampleController::class,'upload'])->name('upload');
 
 //Route::get('/', function () {
    // return view('welcome');
