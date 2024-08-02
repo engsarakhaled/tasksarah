@@ -51,7 +51,7 @@ class CarController extends Controller
         Car::create($data);
         return redirect()->route('cars.index');
         }
-    
+      
 
        
     
@@ -92,37 +92,15 @@ class CarController extends Controller
         'carTitle'=>'required|string',
         'description'=>'required|string|max:1000',
         'price'=>'required|numeric',
-        'image' => 'required|image|mimes:jpeg,png,jpg,gif',
+        'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif',
     ]);
-    
-    if ($request->hasFile('image')) {
-        $oldImagePath = 'assests/images/' . $data['image'];
-    
-        try {
-            if (File::exists($oldImagePath)) {
-                File::delete($oldImagePath);
-            }
-        } catch (\Exception $e) {
-            Log::error('Error deleting old image: ' . $e->getMessage());
-            // Handle the error, e.g., return a response or notify the user
-        }
-    
-        
-       }
-        $imageName = time().'.'.$request->image->extension();
-        $request->image->move(public_path('assests/images/'), $imageName);
-        $data['image'] = 'assests/images/'.$imageName;
-        $data['published']=isset($request->published);
+    if(isset($request->image)){
+        $data['image'] = $this->uploadFile($request->image, 'assests/images');
+      }
         Car::where('id',$id)->update($data);
         return redirect()->route('cars.index');
        }
-       //Checks if a new image was uploaded.
-//If a new image was uploaded, it attempts to delete the old image.
-//Generates a new filename for the uploaded image.
-//Moves the uploaded image to the specified directory.
-//Updates the image and published fields in the $data array.
-//Updates the car record with the new data.
-//Redirects the user to the cars index page.
+
     /**
      * Remove the specified resource from storage.
      */
