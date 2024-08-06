@@ -6,19 +6,65 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ClassroomController;
 use App\Models\Classroom;
+use App\Http\Controllers\ProductController;
 Route::get('/', function () {
    return view('welcome');
 });
-Route::get('cars/create',[CarController::class,'create'])->name('cars.create');
-Route::post('cars',[CarController::class,'store'])->name('cars.store');
-Route::get('cars',[CarController::class,'index'])->name('cars.index');
-Route::get('cars/{id}/edit',[CarController::class,'edit'])->name('cars.edit');
-Route::put('cars/{id}/update',[CarController::class,'update'])->name('cars.update');
-Route::get('cars/{id}/show',[CarController::class,'show'])->name('cars.show');
-Route::get('cars/{id}/delete',[CarController::class,'destroy'])->name('cars.destroy');
-Route::get('cars/trashed',[CarController::class,'showDeleted'])->name('cars.showDeleted');
-Route::patch('cars/{id}',[CarController::class,'restore'])->name('cars.restore');
-Route::delete('cars/{id}',[CarController::class,'forceDelete'])->name('cars.forceDelete');
+
+//https://laravel-news.com/laravel-route-organization-tips
+//additional task
+Route::prefix('products')->controller(ProductController::class)->group(function() {
+   Route::get('', 'index')->name('products.index');
+   Route::get('/create', 'create')->name('products.create');
+   Route::post('', 'store')->name('products.store');
+});
+Route::get('home',[ProductController::class,'home']);
+
+
+
+
+
+
+//Route::get('products',[ProductController::class,'index']);
+//Route::get('products/create',[ProductController::class,'create'])->name('products.create');
+//Route::post('products',[ProductController::class,'store'])->name('products.store');
+//Route::get('home',[ProductController::class,'home']);
+
+
+
+
+
+
+//additional task
+Route::prefix('cars')->controller(CarController::class)->group(function() {
+   Route::get('/create', 'create')->name('cars.create');
+   Route::post('', 'store')->name('cars.store');
+   Route::get('', 'index')->name('cars.index');
+   Route::get('/{id}/edit', 'edit')->name('cars.edit');
+   Route::put('/{id}/update', 'update')->name('cars.update');
+   Route::get('/{id}/show', 'show')->name('cars.show');
+   Route::get('/{id}/delete', 'destroy')->name('cars.destroy');
+   Route::get('/trashed','showDeleted')->name('cars.showDeleted');
+   Route::patch('/{id}','restore')->name('cars.restore');
+   Route::delete('/{id}','forceDelete')->name('cars.forceDelete');
+});
+
+
+//Route::group(['prefix' => 'cars'], function () {
+//Route::get('/create',[CarController::class,'create'])->name('cars.create');
+//Route::post('',[CarController::class,'store'])->name('cars.store');
+//Route::get('',[CarController::class,'index'])->name('cars.index');
+//Route::get('/{id}/edit',[CarController::class,'edit'])->name('cars.edit');
+//Route::put('/{id}/update',[CarController::class,'update'])->name('cars.update');
+//Route::get('/{id}/show',[CarController::class,'show'])->name('cars.show');
+//Route::get('/{id}/delete',[CarController::class,'destroy'])->name('cars.destroy');
+//Route::get('/trashed',[CarController::class,'showDeleted'])->name('cars.showDeleted');
+//Route::patch('/{id}',[CarController::class,'restore'])->name('cars.restore');
+//Route::delete('/{id}',[CarController::class,'forceDelete'])->name('cars.forceDelete');
+//});
+
+//Route::resource('cars',CarController::class)->only(['create','store','index','showDeleted']);
+//Route::resource('/{id}',CarController::class)->only(['edit','update','show','destroy','restore','forceDelete']);
 
 Route::get('classes/create',[ClassroomController::class,'create'])->name('classes.create');
 Route::post('classes',[ClassroomController::class,'store'])->name('classes.store');

@@ -6,11 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\Car;
 use Illuminate\Support\Facades\File;//to use
 use Illuminate\Support\Facades\Log; //to use try and catch
-
+use App\Traits\Common;
 
 class CarController extends Controller
 
 {
+    use Common;
+    
+    
     /**
      * Display a listing of the resource.
      */
@@ -44,22 +47,14 @@ class CarController extends Controller
             'price'=>'required|numeric',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif',
         ]);
-        $imageName = time().'.'.$request->image->extension();//Generates a Unix timestamp (a number representing the current time).
-        $request->image->move(public_path('assests/images/'), $imageName);//the uploaded image will move into the path (assets/\images) and renamed $imageName
-        $data['image'] = 'assests/images/'.$imageName;
+      
+        $data['image'] =$this->uploadFile($request->image,'assests/images');
         $data['published']=isset($request->published);
         Car::create($data);
         return redirect()->route('cars.index');
         }
+
       
-
-       
-    
-    
-
-        
-        
-        
     
 
     /**
@@ -92,12 +87,14 @@ class CarController extends Controller
         'carTitle'=>'required|string',
         'description'=>'required|string|max:1000',
         'price'=>'required|numeric',
-        'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif',
+        'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif',//sometimes not required so if the user dont want to update the image ok
     ]);
-    if(isset($request->image)){
-        $data['image'] = $this->uploadFile($request->image, 'assests/images');
-      }
-        Car::where('id',$id)->update($data);
+    if($request->hasfile('image')){ //if there a request with a new image ,the orders will execute.
+        $data['image'] =$this->uploadFile($request->image,'assests/images');
+    }
+    $data['published']=isset($request->published);  
+      
+         Car::where('id',$id)->update($data); //as previous lecture
         return redirect()->route('cars.index');
        }
 
@@ -130,17 +127,8 @@ class CarController extends Controller
     {
     Car::where('id',$id)->forceDelete();
     return redirect()->route('cars.showDeleted');
-
-    }
-
-   public function upload(Request $request){
-    $file_extension = $request->image->getClientOriginalExtension();
-    $file_name = time() . '.' . $file_extension;
-    $path = 'assests/images';
-    $request->image->move($path, $file_name);
-    return '';
+ 
   }
-  
   }
 
  
