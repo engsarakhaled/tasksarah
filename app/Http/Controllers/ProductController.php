@@ -19,6 +19,14 @@ class ProductController extends Controller
     
     }
 
+    public function about()
+    {
+        Product::get();
+           $products=Product::get();
+           return view('about');
+    
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -59,7 +67,8 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $product=Product::findorfail($id);
+        return view('edit_product',compact('product'));
     }
 
     /**
@@ -67,8 +76,24 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
-    }
+        //dd($request,$id);
+        $data=$request->validate([
+         'title'=>'required|string',
+         'short_description'=>'required|string|max:200',
+         'price'=>'required|numeric',
+         'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif',//sometimes not required so if the user dont want to update the image ok
+     ]);
+     if($request->hasfile('image')){ //if there a request with a new image ,the orders will execute.
+         $data['image'] =$this->uploadFile($request->image,'assests/images');
+     }
+    
+       
+          Product::where('id',$id)->update($data); //as previous lecture
+         return redirect()->route('products.index');
+        }
+ 
+       
+
 
     /**
      * Remove the specified resource from storage.

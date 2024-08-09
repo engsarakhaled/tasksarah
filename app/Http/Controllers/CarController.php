@@ -81,23 +81,8 @@ class CarController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {
-       //dd($request,$id);
-       $data=$request->validate([
-        'carTitle'=>'required|string',
-        'description'=>'required|string|max:1000',
-        'price'=>'required|numeric',
-        'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif',//sometimes not required so if the user dont want to update the image ok
-    ]);
-    if($request->hasfile('image')){ //if there a request with a new image ,the orders will execute.
-        $data['image'] =$this->uploadFile($request->image,'assests/images');
-    }
-    $data['published']=isset($request->published);  
-      
-         Car::where('id',$id)->update($data); //as previous lecture
-        return redirect()->route('cars.index');
-       }
-
+    
+    
     /**
      * Remove the specified resource from storage.
      */

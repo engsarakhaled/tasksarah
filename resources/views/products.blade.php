@@ -41,7 +41,7 @@
               <td scope="row">{{$product['title']}}</td>
               <td>{{$product['price']}}</td>
               <td>{{$product['short_description']}}</td>
-              <td><a href="">Edit</a></td>
+              <td><a href="{{route('products.edit',$product['id'])}}">Edit</a></td>
               <td><a href="">Show</a></td>
               <td><a href="" onclick="confirm('Are you sure you want to delete?')">Delete</a></td>
             </tr>

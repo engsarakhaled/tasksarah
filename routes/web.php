@@ -14,23 +14,26 @@ Route::get('/', function () {
 //https://laravel-news.com/laravel-route-organization-tips
 //additional task
 Route::prefix('products')->controller(ProductController::class)->group(function() {
-   Route::get('', 'index')->name('products.index');
-   Route::get('/create', 'create')->name('products.create');
-   Route::post('', 'store')->name('products.store');
+Route::get('', 'index')->name('products.index');
+Route::get('/create', 'create')->name('products.create');
+Route::post('', 'store')->name('products.store');
+Route::get('/{id}/edit','edit')->name('products.edit');
+Route::put('/{id}/update','update')->name('products.update');
 });
+
 Route::get('home',[ProductController::class,'home']);
+Route::get('about',[ProductController::class,'about']);
 
 
 
 
 
-
-//Route::get('products',[ProductController::class,'index']);
+//Route::get('products',[ProductController::class,'index'])->name('products.index');
 //Route::get('products/create',[ProductController::class,'create'])->name('products.create');
 //Route::post('products',[ProductController::class,'store'])->name('products.store');
 //Route::get('home',[ProductController::class,'home']);
-
-
+//Route::get('/{id}/edit',[ProductController::class,'edit'])->name('products.edit');
+//Route::put('/{id}/update',[ProductController::class,'update'])->name('products.update');
 
 
 
@@ -48,6 +51,12 @@ Route::prefix('cars')->controller(CarController::class)->group(function() {
    Route::patch('/{id}','restore')->name('cars.restore');
    Route::delete('/{id}','forceDelete')->name('cars.forceDelete');
 });
+
+
+
+
+
+
 
 
 //Route::group(['prefix' => 'cars'], function () {
