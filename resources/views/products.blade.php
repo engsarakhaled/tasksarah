@@ -45,7 +45,7 @@
               <td><a href="">Show</a></td>
               <td><a href="" onclick="confirm('Are you sure you want to delete?')">Delete</a></td>
             </tr>
-                        @endforeach
+            @endforeach
           </tbody>
         </table>
       </div>
