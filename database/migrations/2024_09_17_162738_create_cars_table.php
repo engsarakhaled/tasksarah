@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('description');
             $table->float('price');
             $table->boolean('published');
+            $table->foreignId('category_id')->constrained('categories');
             $table->string('image')->nullable();
             $table->softDeletes();
             $table->timestamps();

@@ -64,10 +64,26 @@
           <div class="form-group">
           <label class="control-label col-sm-2" for="image">Image:</label>
           <div class="col-sm-10">
-          <img src="{{asset('assests/images/'.$car->image)}}" alt="{{ $car->carTitle }}" width="100">
+          <img src="{{asset('assests/images/cars/'.$car->image)}}" alt="{{ $car->carTitle }}" width="100">
           <input type="file" class="form-control" id="image" name="image" value="{{old('image',$car->image)}}">{{--{{old('name,$default')}} --}}
           </div>
          </div>
+         <div class="form-group mb-3 row">
+    <label for="" class="form-label col-md-2 fw-bold text-md-end">Category:</label>
+    <div class="col-md-10">
+      <select name="category_id" id="category_id" class="form-control">
+        <option value="{{old('category_id',$car->category_id)}}">Select Category</option>
+          @foreach ($categories as $category)   
+           <option value="{{ $category->id }}"              
+            @selected($car->category_id == $category->id)>{{ $category->category_name }}</option>
+            @endforeach
+            </select>
+             @error('category_name')
+             <div class="alert alert-warning">{{ $message }}</div>
+            @enderror
+             </div>   
+
+    </div>
           <div class="text-md-end">
             <button class="btn mt-4 btn-secondary text-white fs-5 fw-bold border-0 py-2 px-md-5">
              Edit Car

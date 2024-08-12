@@ -81,7 +81,7 @@ class ProductController extends Controller
          'title'=>'required|string',
          'short_description'=>'required|string|max:200',
          'price'=>'required|numeric',
-         'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif',//sometimes not required so if the user dont want to update the image ok
+         'image' =>'sometimes|image|mimes:jpeg,png,jpg,gif',//sometimes not required so if the user dont want to update the image ok
      ]);
      if($request->hasfile('image')){ //if there a request with a new image ,the orders will execute.
          $data['image'] =$this->uploadFile($request->image,'assests/images');

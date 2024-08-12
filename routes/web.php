@@ -24,7 +24,7 @@ Route::put('/{id}/update','update')->name('products.update');
 Route::get('home',[ProductController::class,'home']);
 Route::get('about',[ProductController::class,'about']);
 
-
+Route::get('test',[ExampleController::class,'test']);
 
 
 

@@ -84,7 +84,7 @@
 
                         <div class="col-lg-4 mb-4 col-12">
                             <div class="team-thumb d-flex align-items-center">
-                                <img src="{{asset('asset/images/people/senior-man-wearing-white-face-mask-covid-19-campaign-with-design-space.jpeg')}}" class="img-fluid custom-circle-image team-image me-4" alt="">
+                                <img src="{{asset('assests/images/people/senior-man-wearing-white-face-mask-covid-19-campaign-with-design-space.jpeg')}}" class="img-fluid custom-circle-image team-image me-4" alt="">
 
                                 <div class="team-info">
                                     <h5 class="mb-0">Don</h5>
@@ -101,7 +101,7 @@
 
                         <div class="col-lg-4 mb-4 col-12">
                             <div class="team-thumb d-flex align-items-center">
-                                <img src="{{asset('asset/images/people/portrait-british-woman.jpeg')}}" class="img-fluid custom-circle-image team-image me-4" alt="">
+                                <img src="{{asset('assests/images/people/portrait-british-woman.jpeg')}}" class="img-fluid custom-circle-image team-image me-4" alt="">
 
                                 <div class="team-info">
                                     <h5 class="mb-0">Kelly</h5>
@@ -117,7 +117,7 @@
 
                         <div class="col-lg-4 mb-lg-0 mb-4 col-12">
                             <div class="team-thumb d-flex align-items-center">
-                                <img src="{{asset('asset/images/people/beautiful-woman-face-portrait-brown-background.jpeg')}}" class="img-fluid custom-circle-image team-image me-4" alt="">
+                                <img src="{{asset('assests/images/people/beautiful-woman-face-portrait-brown-background.jpeg')}}" class="img-fluid custom-circle-image team-image me-4" alt="">
 
                                 <div class="team-info">
                                     <h5 class="mb-0">Marie</h5>
@@ -147,7 +147,7 @@
                                     <p class="lead">Over three years in business, We’ve had the chance to work on a variety of projects, with companies Lorem ipsum dolor sit amet</p>
 
                                     <div class="slick-testimonial-client d-flex align-items-center mt-4">
-                                        <img src="{{asset('asset/images/people/senior-man-wearing-white-face-mask-covid-19-campaign-with-design-space.jpeg')}}" class="img-fluid custom-circle-image me-3" alt="">
+                                        <img src="{{asset('assests/images/people/senior-man-wearing-white-face-mask-covid-19-campaign-with-design-space.jpeg')}}" class="img-fluid custom-circle-image me-3" alt="">
 
                                         <span>George, <strong class="text-muted">Digital Art Fashion</strong></span>
                                     </div>
@@ -157,7 +157,7 @@
                                     <p class="lead">Over three years in business, We’ve had the chance to work on a variety of projects, with companies Lorem ipsum dolor sit amet</p>
 
                                     <div class="slick-testimonial-client d-flex align-items-center mt-4">
-                                        <img src="{{asset('asset/images/people/beautiful-woman-face-portrait-brown-background.jpeg')}}" class="img-fluid custom-circle-image me-3" alt="">
+                                        <img src="{{asset('assests/images/people/beautiful-woman-face-portrait-brown-background.jpeg')}}" class="img-fluid custom-circle-image me-3" alt="">
 
                                         <span>Sandar, <strong class="text-muted">Zoom Fashion Idea</strong></span>
                                     </div>
@@ -167,7 +167,7 @@
                                     <p class="lead">Over three years in business, We’ve had the chance to work on a variety of projects, with companies Lorem ipsum dolor sit amet</p>
 
                                     <div class="slick-testimonial-client d-flex align-items-center mt-4">
-                                        <img src="{{asset('asset/images/people/portrait-british-woman.jpeg')}}" class="img-fluid custom-circle-image me-3" alt="">
+                                        <img src="{{asset('assests/images/people/portrait-british-woman.jpeg')}}" class="img-fluid custom-circle-image me-3" alt="">
 
                                         <span>Marie, <strong class="text-muted">Art Fashion Design</strong></span>
                                     </div>

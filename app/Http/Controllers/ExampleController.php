@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Student;
+use Illuminate\Support\Facades\DB;
 class ExampleController extends Controller
 {
     public function content()
@@ -38,4 +39,12 @@ public function index(){
   return view ('index');
 }
 
+public function test(){ //go to student table find the student with id =4 and appear all the data
+  dd(DB::table('students')
+            ->join('phones', 'phones.id', '=', 'students.phone_id')
+            ->where('students.id', '=', 4)
+            ->first()
+  );
+
+}
 }
