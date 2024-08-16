@@ -79,7 +79,7 @@
                 <option value="{{$category->id}}">{{$category->category_name}}</option>
                 @endforeach
               </select>
-              @error('category_name')
+              @error('category_id') 
                 <div class="alert alert-warning">{{$message}}</div>
               @enderror
             </div>

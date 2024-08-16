@@ -50,8 +50,8 @@
                 </p>
               </div>
               <div class="mb-4">
-                <p class="card-text">
-                  <span class="fw-bold">Category_id:</span><br>{{$car['category_id']}}
+                <p class="card-text">   
+                  <span class="fw-bold">Category_name:</span><br>{{ $car->category->category_name }}
                 </p>
               </div>
 

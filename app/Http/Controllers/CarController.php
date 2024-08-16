@@ -21,7 +21,7 @@ class CarController extends Controller
     public function index()
     {
        Car::get();
-       $cars=Car::get();
+       $cars=Car::with('category')->get();
        return view('cars',compact('cars'));
 
     }
@@ -66,9 +66,14 @@ class CarController extends Controller
     public function show(string $id)
     {
        
-        $car = Car::with('category')->findOrFail($id);//Find a car with the given ID, also include its category details, and if you can't find the car, throw an error."
+        $car = Car::with('category')->findOrFail($id);
         return view('car_details',compact('car'));
     }
+ //Find a car with the given ID, also include its category details, and if you can't find the car, throw an error."
+
+
+
+
         //$car = Car::with('category')->findOrFail($id);
        //Purpose: Retrieves a specific car record based on its ID and eagerly loads its associated category.
        //Breakdown:

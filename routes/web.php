@@ -7,9 +7,18 @@ use App\Http\Controllers\CarController;
 use App\Http\Controllers\ClassroomController;
 use App\Models\Classroom;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ContactController;
 Route::get('/', function () {
    return view('welcome');
 });
+//task12 contactus form 
+Route::get('contactUS',[ContactController::class,'contactUS']); 
+Route::post('email',[ContactController::class,'contactUSPost'])->name('email');
+//Route::get('contactUS',[ContactController::class,'create'])->name('contactUS.create'); //database
+//Route::post('contactUS',[ContactController::class,'store'])->name('contactUS.store'); //database
+
+ 
+
 
 //https://laravel-news.com/laravel-route-organization-tips
 //additional task
@@ -39,7 +48,7 @@ Route::get('test',[ExampleController::class,'test']);
 
 
 //additional task
-Route::prefix('cars')->controller(CarController::class)->group(function() {
+Route::prefix('cars')->controller(CarController::class)->middleware('verified')->group(function() {
    Route::get('/create', 'create')->name('cars.create');
    Route::post('', 'store')->name('cars.store');
    Route::get('', 'index')->name('cars.index');
@@ -85,8 +94,6 @@ Route::delete('classes/{id}/delete',[ClassroomController::class,'destroy'])->nam
 Route::get('classes/trashed',[ClassroomController::class,'showDeleted'])->name('classes.showDeleted');
 Route::patch('classes/{id}',[ClassroomController::class,'restore'])->name('classes.restore');
 Route::delete('classes/{id}',[ClassroomController::class,'forceDelete'])->name('classes.forceDelete');
-//Route::get('content',[ExampleController::class,'content']); //action written inside ExampleController
-//Route::post('datatask',[ExampleController::class,'datatask'])->name('datatask');
 Route::get('uploadForm',[ExampleController::class,'uploadForm'])->name('uploadForm');
 Route::post('upload',[ExampleController::class,'upload'])->name('upload');
 
@@ -196,9 +203,13 @@ Route::post('upload',[ExampleController::class,'upload'])->name('upload');
 //return "HI HI";
 //})->name('s');
 
-//Route::post('logincheck', function (){
- // return view('logincheck');
- // })->name('logincheck');
+Route::post('logincheck', function (){
+ return view('logincheck');
+ })->name('logincheck');
     
 
 
+
+Auth::routes(['verify' => true]);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
