@@ -5,7 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-
+use App\Http\Middleware\TerminatingMiddleware;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -13,7 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(TerminatingMiddleware::class);
     }
 
     /**

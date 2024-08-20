@@ -20,6 +20,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'mobile',
     ];
 
     /**
@@ -44,4 +45,11 @@ class User extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
         ];
     }
+
+    public function isAdmin()
+    {
+        // Replace 'is_admin' with the actual column name in your users table
+        return $this->is_admin;
+    }
+
 }

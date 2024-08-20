@@ -23,6 +23,7 @@ class CarFactory extends Factory
             'published' => fake()->numberBetween(0, 1),
             'image' => basename(fake()->image(public_path('assests/images/cars'))),
             'category_id'=> fake()->numberBetween(1, 2),
+            
         ];
     }
 }

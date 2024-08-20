@@ -5,17 +5,50 @@ use App\Http\Controllers\ExampleController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ClassroomController;
-use App\Models\Classroom;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ContactController;
+use App\Http\Middleware\EnsureAuthenticationIsValid; //using middleware //task13
+
+
+//https://laravel.com/docs/11.x/middleware Task 13
 Route::get('/', function () {
    return view('welcome');
 });
 //task12 contactus form 
-Route::get('contactUS',[ContactController::class,'contactUS']); 
+Route::get('contactUS',[ContactController::class,'contactUS']);
 Route::post('email',[ContactController::class,'contactUSPost'])->name('email');
 //Route::get('contactUS',[ContactController::class,'create'])->name('contactUS.create'); //database
 //Route::post('contactUS',[ContactController::class,'store'])->name('contactUS.store'); //database
+
+
+// task 13
+Route::prefix('cars')->controller(CarController::class)->middleware([EnsureAuthenticationIsValid::class])->group(function() {
+   Route::get('/create', 'create')->name('cars.create');
+   Route::post('', 'store')->name('cars.store');
+   Route::get('', 'index')->name('cars.index');
+   Route::get('/{id}/edit', 'edit')->name('cars.edit');
+   Route::put('/{id}/update', 'update')->name('cars.update');
+   Route::get('/{id}/show', 'show')->name('cars.show');
+   Route::get('/{id}/delete', 'destroy')->name('cars.destroy');
+   Route::get('/trashed','showDeleted')->name('cars.showDeleted');
+   Route::patch('/{id}','restore')->name('cars.restore');
+   Route::delete('/{id}','forceDelete')->name('cars.forceDelete');
+});
+
+
+Route::get('classes/create',[ClassroomController::class,'create'])->name('classes.create')->middleware(EnsureTokenIsValid::class);
+Route::post('classes',[ClassroomController::class,'store'])->name('classes.store');
+Route::get('classes',[ClassroomController::class,'index'])->name('classes.index');
+Route::get('classes/{id}/edit',[ClassroomController::class,'edit'])->name('classes.edit');
+Route::put('classes/{id}/update',[ClassroomController::class,'update'])->name('classes.update');
+Route::get('classes/{id}/show',[ClassroomController::class,'show'])->name('classes.show');
+Route::delete('classes/{id}/delete',[ClassroomController::class,'destroy'])->name('classes.destroy');
+Route::get('classes/trashed',[ClassroomController::class,'showDeleted'])->name('classes.showDeleted');
+Route::patch('classes/{id}',[ClassroomController::class,'restore'])->name('classes.restore');
+Route::delete('classes/{id}',[ClassroomController::class,'forceDelete'])->name('classes.forceDelete');
+Route::get('uploadForm',[ExampleController::class,'uploadForm'])->name('uploadForm');
+Route::post('upload',[ExampleController::class,'upload'])->name('upload');
+
 
  
 
@@ -47,19 +80,6 @@ Route::get('test',[ExampleController::class,'test']);
 
 
 
-//additional task
-Route::prefix('cars')->controller(CarController::class)->middleware('verified')->group(function() {
-   Route::get('/create', 'create')->name('cars.create');
-   Route::post('', 'store')->name('cars.store');
-   Route::get('', 'index')->name('cars.index');
-   Route::get('/{id}/edit', 'edit')->name('cars.edit');
-   Route::put('/{id}/update', 'update')->name('cars.update');
-   Route::get('/{id}/show', 'show')->name('cars.show');
-   Route::get('/{id}/delete', 'destroy')->name('cars.destroy');
-   Route::get('/trashed','showDeleted')->name('cars.showDeleted');
-   Route::patch('/{id}','restore')->name('cars.restore');
-   Route::delete('/{id}','forceDelete')->name('cars.forceDelete');
-});
 
 
 
@@ -84,18 +104,7 @@ Route::prefix('cars')->controller(CarController::class)->middleware('verified')-
 //Route::resource('cars',CarController::class)->only(['create','store','index','showDeleted']);
 //Route::resource('/{id}',CarController::class)->only(['edit','update','show','destroy','restore','forceDelete']);
 
-Route::get('classes/create',[ClassroomController::class,'create'])->name('classes.create');
-Route::post('classes',[ClassroomController::class,'store'])->name('classes.store');
-Route::get('classes',[ClassroomController::class,'index'])->name('classes.index');
-Route::get('classes/{id}/edit',[ClassroomController::class,'edit'])->name('classes.edit');
-Route::put('classes/{id}/update',[ClassroomController::class,'update'])->name('classes.update');
-Route::get('classes/{id}/show',[ClassroomController::class,'show'])->name('classes.show');
-Route::delete('classes/{id}/delete',[ClassroomController::class,'destroy'])->name('classes.destroy');
-Route::get('classes/trashed',[ClassroomController::class,'showDeleted'])->name('classes.showDeleted');
-Route::patch('classes/{id}',[ClassroomController::class,'restore'])->name('classes.restore');
-Route::delete('classes/{id}',[ClassroomController::class,'forceDelete'])->name('classes.forceDelete');
-Route::get('uploadForm',[ExampleController::class,'uploadForm'])->name('uploadForm');
-Route::post('upload',[ExampleController::class,'upload'])->name('upload');
+
 
 //Route::get('/', function () {
    // return view('welcome');
