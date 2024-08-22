@@ -16,7 +16,9 @@ class ContactController extends Controller
 
      public function contactUS()
      {
-         return view('contactUS');
+      
+         session()->put('test', 'First Laravel session');
+                return view('contactUS');
      }
 
     // public function contactUSPost(Request $request) //i found to ways this way dont use ContactForm but it didnt work 
@@ -52,12 +54,13 @@ class ContactController extends Controller
           'message' => 'required',
           'subject' => 'required',
       ]);
-      //ContactUS::create($data);
+     ContactUS::create($data);
       Mail::to($data['email'])->send(new ContactFormMail($data));
 
       return view('email',compact('data'));
     }
-
+   
+  
 
  
     

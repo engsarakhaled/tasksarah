@@ -10,6 +10,25 @@ use App\Http\Controllers\ContactController;
 use App\Http\Middleware\EnsureAuthenticationIsValid; //using middleware //task13
 
 
+
+// task 14
+//https://laravel.com/docs/11.x/localization
+//https://packagist.org/packages/tcg/voyager
+//https://packagist.org/packages/dwij/laraadmin
+Route::group(
+   [
+      'prefix' => LaravelLocalization::setLocale(),
+      'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+   ], function(){ 
+      
+      Route::get('cars/create/{locale?}',[CarController::class,'create'])->name('cars.create');
+      Route::post('cars',[CarController::class,'store'])->name('cars.store');
+   });
+
+
+
+
+
 //https://laravel.com/docs/11.x/middleware Task 13
 Route::get('/', function () {
    return view('welcome');
@@ -21,19 +40,21 @@ Route::post('email',[ContactController::class,'contactUSPost'])->name('email');
 //Route::post('contactUS',[ContactController::class,'store'])->name('contactUS.store'); //database
 
 
-// task 13
-Route::prefix('cars')->controller(CarController::class)->middleware([EnsureAuthenticationIsValid::class])->group(function() {
-   Route::get('/create', 'create')->name('cars.create');
-   Route::post('', 'store')->name('cars.store');
-   Route::get('', 'index')->name('cars.index');
-   Route::get('/{id}/edit', 'edit')->name('cars.edit');
-   Route::put('/{id}/update', 'update')->name('cars.update');
-   Route::get('/{id}/show', 'show')->name('cars.show');
-   Route::get('/{id}/delete', 'destroy')->name('cars.destroy');
-   Route::get('/trashed','showDeleted')->name('cars.showDeleted');
-   Route::patch('/{id}','restore')->name('cars.restore');
-   Route::delete('/{id}','forceDelete')->name('cars.forceDelete');
-});
+
+
+   
+//Route::prefix('cars')->controller(CarController::class)->middleware([EnsureAuthenticationIsValid::class])->group(function() {
+ //  Route::get('/create', 'create')->name('cars.create');
+ //  Route::post('', 'store')->name('cars.store');
+ //  Route::get('', 'index')->name('cars.index');
+ //  Route::get('/{id}/edit', 'edit')->name('cars.edit');
+ //  Route::put('/{id}/update', 'update')->name('cars.update');
+ //  Route::get('/{id}/show', 'show')->name('cars.show');
+  // Route::get('/{id}/delete', 'destroy')->name('cars.destroy');
+  // Route::get('/trashed','showDeleted')->name('cars.showDeleted');
+  // Route::patch('/{id}','restore')->name('cars.restore');
+  // Route::delete('/{id}','forceDelete')->name('cars.forceDelete');
+//});
 
 
 Route::get('classes/create',[ClassroomController::class,'create'])->name('classes.create')->middleware(EnsureTokenIsValid::class);
