@@ -54,9 +54,9 @@ class ContactController extends Controller
           'message' => 'required',
           'subject' => 'required',
       ]);
-     ContactUS::create($data);
+      ContactUS::create($data);
       Mail::to($data['email'])->send(new ContactFormMail($data));
-
+      
       return view('email',compact('data'));
     }
    
