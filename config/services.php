@@ -35,4 +35,14 @@ return [
         ],
     ],
 
+   'github' => [
+    'client_id' => env('GITHUB_CLIENT_ID'),
+    'client_secret' => env('GITHUB_CLIENT_SECRET'),
+    'redirect' => 'http://localhost/laravel-R6/public/auth/github/callback',
+   ],
+  // 'google' => [
+   //'SOCIALITE_GOOGLE_CLIENT_ID'=> env('SOCIALITE_GOOGLE_CLIENT_ID'),
+  //'SOCIALITE_GOOGLE_CLIENT_SECRET'=> env('SOCIALITE_GOOGLE_CLIENT_SECRET'),
+  
+//  ],
 ];

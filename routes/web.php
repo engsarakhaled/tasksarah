@@ -8,8 +8,17 @@ use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ContactController;
 use App\Http\Middleware\EnsureAuthenticationIsValid; //using middleware //task13
+use App\Http\Controllers\SocialController;
+use App\Http\Controllers\SendEmailController;
 
 
+Route::get('sendemails', [SendEmailController::class, 'sendemails'])->name('sendemail');//task16
+
+Route::get('auth/github/redirect', [SocialController::class, 'redirect'])->name('socialLogin');
+Route::get('auth/github/callback', [SocialController::class, 'callback']);
+
+//Route::get('auth/google/redirect', [SocialController::class, 'redirectToProvider'])->name('socialLogingoogle');
+//Route::get('auth/google/callback', [SocialController::class, 'handleProviderCallback']);
 
 // task 14
 //https://laravel.com/docs/11.x/localization
